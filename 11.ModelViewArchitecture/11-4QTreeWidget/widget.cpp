@@ -33,17 +33,16 @@ Widget::~Widget()
     delete ui;
 }
 
-
 void Widget::on_listItemsButton_clicked()
 {
-    for(size_t i{}; i < ui->treeWidget->topLevelItemCount();++i){
+    for(size_t i{}, tree_size{ui->treeWidget->topLevelItemCount()}; i < tree_size; ++i){
          auto item = ui->treeWidget->topLevelItem(i);
          if(item){
              qDebug() << item->data(0,Qt::DisplayRole).toString() << ","
                              << item->data(1,Qt::DisplayRole).toString();
              //Look for children
              if(item->childCount()!=0){
-                 for(size_t j{}; j < ui->treeWidget->topLevelItemCount();++j){
+                 for(size_t j{}, item_size{item->childCount()}; j < item_size; ++j){
                      auto child = item->child(j);
                      if(child){
                          qDebug() <<"---"<< child->data(0,Qt::DisplayRole).toString() << ","
@@ -54,4 +53,5 @@ void Widget::on_listItemsButton_clicked()
          }
      }
 }
+
 
